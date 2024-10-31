@@ -11,7 +11,27 @@ void test1() {
    checkit_string(result, expected);
 }
 
+void test2() {
+   char input[] = "ABCDefgh";
+   char result[15];
+   char *expected = "abcdefgh";
+
+   str_lower(input, result);
+   checkit_string(result, expected);
+}
+
+
+void test3() {
+   char input[] = "ORIGINAL";
+   char *expected = "original";
+
+   str_lower_mutate(input);
+   checkit_string(input, expected);
+}
+
 int main(void) {
    test1();
+   test2();
+   test3();
    return 0;
 }
