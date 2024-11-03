@@ -9,15 +9,12 @@ struct array_list
 
 struct array_list *array_list_new()
 {
-
     int size = 10;
-
     struct array_list *ptr = (struct array_list *)malloc(2 * sizeof(size_t) + size * sizeof(char *));
     if (ptr == NULL)
     {
         return NULL;
     }
-
     // make struct
     // only init cap and len, data left untouched
     ptr->capacity = size;
@@ -25,7 +22,7 @@ struct array_list *array_list_new()
     return ptr;
 }
 
-struct array_list* array_list_add_to_end(struct array_list *list, char *c)
+struct array_list* array_list_add_to_end(struct array_list *list, const char *c)
 {
 
     if (list->len == list->capacity)
@@ -33,11 +30,10 @@ struct array_list* array_list_add_to_end(struct array_list *list, char *c)
         struct array_list *ptr2 = (struct array_list *)realloc(list, 2 * sizeof(size_t) + 2 * list->capacity * sizeof(char *)); // find new memory space
         if (ptr2 == NULL)
         {
-            return NULL; // Handle memory allocation failure
+            return list; // if fail; keep list address at list.
         }
-        // no need to copy info
-        list = ptr2;
-        list->capacity = list->capacity * 2; // increase capacity of struct
+        list = ptr2; //if suceed: list = new address and increase cap
+        list->capacity = list->capacity * 2;
     }
     // add char to data
     char *str = c;
@@ -68,7 +64,6 @@ struct array_list* array_list_add_to_end(struct array_list *list, char *c)
     {
         printf("%s\n", list->data[i]);
     }
-    
 
     return 0;
 }*/
